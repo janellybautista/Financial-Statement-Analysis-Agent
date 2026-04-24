@@ -1,100 +1,70 @@
-# Financial-Statement-Analysis-Agent
-A pipeline that extracts financial metrics from company filings, cleans and stores them in SQL, analyzes trends and ratios, and exports Excel-ready reports and dashboards with optional AI-generated summaries.
-
-# Setup Instructions
-
-Before running `analysis_agent.py`, follow these steps:
-
-1. **Initialize OpenAI by adding the API key**:
-   In the script, initialize the OpenAI client by adding your API key:
-   ```python
-   client = OpenAI(api_key="type_key_here")
-
-2. **Modify the input file path**:
-  Go to the "Main script" and update the input file path to point to your PDF:
-   ```python
-   pdf_path = "Add_path_to_Sample_Financial_Statements.pdf"
-
-# Output
-
-This agent analyzes the imported PDF with OpenAI, plots the relevant data from the file and generates a LaTeX report. 
-
-
-
 # Financial Data Analysis Pipeline
 
-This project is a Python-based financial data analysis pipeline that extracts financial information from PDF, Excel, and CSV files, organizes the data into structured tables, stores the results in a SQLite database, calculates financial KPIs using pandas and SQL, and exports clean datasets for reporting in Power BI.
+A Python pipeline that extracts financial metrics from PDF, Excel, and CSV financial files, cleans and stores the data in SQLite, calculates financial KPIs with pandas and SQL, and exports Power BI-ready reports and charts.
 
-The goal of this project is to practice a full data analyst workflow:
+# What This Project Does
 
-Messy financial files → Python extraction/cleaning → SQLite database → KPI calculations → CSV outputs → Power BI dashboard
+This project takes financial files from an input folder and turns them into a clean dataset for analysis.
 
-## Features
+The pipeline:
 
-- Reads financial data from PDF, Excel, and CSV files
-- Extracts company/entity, year, month, period, source file, and file type from file names
-- Organizes financial fields into a structured dataset
-- Stores cleaned data in a SQLite database
-- Calculates financial KPIs using pandas and SQL
-- Exports CSV files for Power BI
-- Generates basic Python charts for quick visual checks
+1. Reads PDF, Excel, or CSV financial files
+2. Extracts key financial values
+3. Organizes the data into a structured table
+4. Stores the cleaned data in a SQLite database
+5. Calculates financial KPIs using pandas and SQL
+6. Exports CSV files for Power BI
+7. Creates basic charts for quick checking
 
-## Project Structure
+# Supported Input Files
 
-financial-data-analysis-pipeline/
-├── financial_pipeline.py
-├── input_files/
-├── output/
-├── README.md
-└── requirements.txt
+Put all input files inside the `input_files/` folder.
 
-## Input File Instructions
+Supported file types:
 
-Place all files inside the `input_files/` folder before running the pipeline.
+- `.pdf`
+- `.xlsx`
+- `.xls`
+- `.csv`
 
-This project supports:
+# File Naming
 
-- PDF files: `.pdf`
-- Excel files: `.xlsx` or `.xls`
-- CSV files: `.csv`
+Use this file name format when possible:
 
-## Recommended File Naming Format
-
-Use this format:
-
-companyname_year_month.filetype
+company_year_month.filetype
 
 Examples:
 
 company_a_2024_01.csv  
-company_a_2024_02.xlsx  
-company_b_2024_01.pdf  
-company_b_april_2024.xlsx  
+company_b_2024_02.xlsx  
+company_c_april_2024.pdf  
 
 The pipeline uses the file name to identify:
 
-- company/entity
+- company
 - year
 - month
-- reporting period
+- period
 - source file
-- file type
+- source type
 
-For example:
+Example:
 
 company_a_2024_01.csv
 
-will be read as:
+is read as:
 
-company: company_a  
-year: 2024  
-month: 01  
-period: 2024-01  
-source_type: csv  
+company = company_a  
+year = 2024  
+month = 01  
+period = 2024-01  
+source_type = csv  
 
-## CSV Input Format
+# CSV Input
 
-CSV files should use structured columns like this:
+CSV files should already be organized in columns.
+
+Recommended CSV columns:
 
 company,year,month,service_revenue,sales_revenue,net_income,operating_expenses,total_assets,current_assets,liabilities,retained_earnings
 
@@ -103,13 +73,10 @@ Example:
 company,year,month,service_revenue,sales_revenue,net_income,operating_expenses,total_assets,current_assets,liabilities,retained_earnings  
 company_a,2024,01,500000,300000,120000,450000,900000,300000,200000,150000  
 company_b,2024,01,400000,300000,80000,500000,750000,250000,180000,100000  
-company_c,2024,01,600000,200000,150000,420000,1000000,350000,220000,180000  
 
-If `company`, `year`, or `month` are missing from the CSV, the pipeline will try to extract them from the file name.
+# PDF and Excel Input
 
-## PDF and Excel Input Format
-
-PDF and Excel files should contain recognizable financial labels such as:
+PDF and Excel files should include recognizable financial labels, such as:
 
 Service revenue  
 Sales revenue  
@@ -120,143 +87,110 @@ Total current assets
 Total current liabilities  
 Retained earnings  
 
-The parser searches for these labels and extracts the matching financial values.
+The parser searches for these labels and extracts the matching values.
 
-Example file names:
+# Why CSV, Excel, and PDF Inputs Look Different
 
-company_a_2024_01.pdf  
-company_b_2024_02.xlsx  
+The input instructions are different because each file type stores data differently.
 
-## KPIs Calculated
+CSV files are usually already structured, so the pipeline reads columns directly.
 
-The pipeline calculates the following financial KPIs:
+Excel files may have multiple sheets, blank rows, or messy formatting, so the pipeline converts the sheet into text and searches for financial labels.
 
-Total revenue = service_revenue + sales_revenue
+PDF files are usually the messiest, so the pipeline extracts text and searches for financial labels.
 
-Profit margin = net_income / total_revenue
+Even though the input formats are different, the final goal is the same:
 
-Operating expense ratio = operating_expenses / total_revenue
+turn financial files into one clean dataset for analysis.
 
-Current ratio = current_assets / liabilities
+# KPIs Calculated
 
-Asset-to-liability ratio = total_assets / liabilities
+The pipeline calculates:
 
-## SQL Analysis
+- Total revenue
+- Profit margin
+- Operating expense ratio
+- Current ratio
+- Asset-to-liability ratio
 
-The pipeline stores the cleaned financial data in a SQLite database called:
+Formulas:
 
-output/financial_analysis.db
+total_revenue = service_revenue + sales_revenue
 
-It also runs SQL queries to generate outputs such as:
+profit_margin = net_income / total_revenue
 
-- all financial records
-- SQL-calculated KPIs
-- highest profit margin
-- strongest liquidity
-- largest total assets
-- revenue by company
-- revenue by reporting period
-- average profit margin by company
+operating_expense_ratio = operating_expenses / total_revenue
 
-## Output Files
+current_ratio = current_assets / liabilities
 
-After running the pipeline, outputs are saved in the `output/` folder.
+asset_to_liability_ratio = total_assets / liabilities
 
-Main output files include:
+# Setup Instructions
 
-financial_data_with_kpis.csv  
-financial_analysis.db  
-all_records.csv  
-sql_calculated_kpis.csv  
-highest_profit_margin.csv  
-strongest_liquidity.csv  
-largest_total_assets.csv  
-revenue_by_company.csv  
-revenue_by_period.csv  
-average_profit_margin_by_company.csv  
-total_revenue_by_company.png  
-profit_margin_by_company.png  
-total_revenue_by_period.png  
-
-The main cleaned dataset for Power BI is:
-
-output/financial_data_with_kpis.csv
-
-## Power BI Use
-
-The file `financial_data_with_kpis.csv` can be imported into Power BI to create a dashboard with:
-
-- KPI cards for total revenue, net income, profit margin, current ratio, and asset-to-liability ratio
-- bar charts comparing revenue by company
-- bar charts comparing profit margin by company
-- period-based revenue trends
-- tables showing financial records and calculated KPIs
-- slicers for company, year, month, period, and source type
-
-## How to Run the Project
-
-### 1. Install required packages
+Before running the project, install the required packages:
 
 pip install pandas matplotlib pdfplumber openpyxl
 
-### 2. Add input files
+# How to Run
 
-Create or open the `input_files/` folder and place your PDF, Excel, or CSV files inside it.
+1. Put your PDF, Excel, or CSV files inside the `input_files/` folder.
 
-Example:
-
-input_files/
-├── company_a_2024_01.csv
-├── company_b_2024_01.xlsx
-└── company_c_2024_01.pdf
-
-### 3. Run the pipeline
+2. Run the script:
 
 python3 financial_pipeline.py
 
-If your system uses `python` instead of `python3`, run:
+If your computer uses `python` instead of `python3`, run:
 
 python financial_pipeline.py
 
-### 4. Check the output folder
+# Output
 
-After the script runs, open the `output/` folder to view the generated files.
+The pipeline creates an `output/` folder with:
 
-## Example Workflow
+- `financial_data_with_kpis.csv`
+- `financial_analysis.db`
+- `all_records.csv`
+- `sql_calculated_kpis.csv`
+- `highest_profit_margin.csv`
+- `strongest_liquidity.csv`
+- `largest_total_assets.csv`
+- `revenue_by_company.csv`
+- `revenue_by_period.csv`
+- `average_profit_margin_by_company.csv`
+- chart images
 
-1. User places financial files in `input_files/`
-2. Python reads PDF, Excel, or CSV files
-3. The pipeline extracts financial values
-4. Data is cleaned and organized into a structured table
-5. KPIs are calculated with pandas
-6. Data is saved to SQLite
-7. SQL queries calculate and rank financial metrics
-8. CSV files are exported for Power BI
-9. Power BI dashboard visualizes the final results
+The main file for Power BI is:
 
-## Privacy Note
+output/financial_data_with_kpis.csv
 
-Do not upload private or confidential financial statements to a public GitHub repository.
+# Power BI Dashboard
 
-For portfolio or demo use, use:
+Use `financial_data_with_kpis.csv` in Power BI to create:
 
-- synthetic financial data
-- public financial reports
-- anonymized sample files
+- KPI cards
+- revenue charts
+- profit margin charts
+- company comparisons
+- period trends
+- financial summary tables
 
-This repository should not include private school, company, vendor, employee, donor, or student financial information.
+# Privacy Note
 
-## Future Improvements
+Do not upload private financial statements to a public GitHub repository.
 
-Possible future upgrades include:
+For portfolio use, use public reports, anonymized files, or synthetic sample data.
 
-- adding more flexible parsing rules for different financial statement formats
-- supporting scanned PDFs with OCR or document parsing tools
-- adding automated data validation checks
-- building a full Power BI dashboard
-- adding LLM-generated summaries from already-computed KPI results
-- creating a Streamlit app for uploading files and viewing results interactively
+# Future Improvements
 
-## Project Purpose
+Possible future upgrades:
 
-I built this project to connect my quantitative research background with business data analysis. The project practices common data analyst tasks: cleaning messy financial data, organizing records in a database, calculating KPIs, writing SQL queries, and preparing outputs for dashboard reporting.
+- Add more flexible financial label matching
+- Add support for scanned PDFs or OCR
+- Add data validation checks
+- Add optional AI-generated summaries from already-computed KPI results
+- Add a Streamlit app for uploading files
+- Build a full Power BI dashboard
+
+# Project Purpose
+
+I built this project to connect my quantitative research background with business data analysis. It practices common data analyst tasks: cleaning messy data, storing records in a database, calculating KPIs, writing SQL queries, and preparing outputs for dashboard reporting.
