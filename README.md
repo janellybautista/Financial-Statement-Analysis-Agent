@@ -192,12 +192,6 @@ output/
 └── total_revenue_by_period.png
 ```
 
-The main file for Power BI is:
-
-```text
-output/financial_data_with_kpis.csv
-```
-
 ---
 
 ## 4. Analytics and Reporting
