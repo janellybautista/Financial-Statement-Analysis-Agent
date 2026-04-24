@@ -118,27 +118,10 @@ Total current liabilities
 Retained earnings
 ```
 
-The parser searches for these labels and extracts the matching values.
+The parser searches for these labels and extracts the matching values. Note: The parser currently uses regex patterns for common financial labels. If a PDF or Excel file uses different wording, abbreviations, or unusual formatting, the patterns in `financial_pipeline.py` may need to be updated.
 
 ---
 
-## Why CSV, Excel, and PDF Inputs Look Different
-
-Each file type stores financial data differently.
-
-| File Type | Why It Is Different |
-|---|---|
-| CSV | Usually already structured, so the pipeline reads columns directly |
-| Excel | Can have multiple sheets, blank rows, notes, or messy formatting |
-| PDF | Usually the messiest; the pipeline extracts text and searches for labels |
-
-Even though the input formats are different, the final goal is the same:
-
-```text
-Turn financial files into one clean dataset for analysis.
-```
-
----
 
 ## KPIs Calculated
 
