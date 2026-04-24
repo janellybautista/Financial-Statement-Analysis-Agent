@@ -44,9 +44,7 @@ Place all files inside the `input_files/` folder.
 | Excel | `.xlsx`, `.xls` | Reads all sheets in the workbook and searches for financial labels |
 | CSV | `.csv` | Reads structured columns directly |
 
-For best results, each Excel file should represent one company/entity and one reporting period. The workbook can contain multiple sheets, but the sheets should belong to the same company and period.
-
-Note: For cleaner analysis, each PDF or Excel file should represent one company/entity and one reporting period when possible. If one workbook contains multiple companies or periods across different sheets, the parser may need additional logic to separate them correctly.
+Note: For best results, each PDF or Excel file should represent one company/entity and one reporting period. Excel workbooks can contain multiple sheets, but those sheets should belong to the same company and period. If one workbook contains different companies or periods across sheets, the parser may need additional logic to separate them correctly.
 
 ---
 
