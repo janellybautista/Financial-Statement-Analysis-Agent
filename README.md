@@ -234,7 +234,9 @@ current_ratio
 asset_to_liability_ratio
 ```
 
-The script then automatically runs SQL queries on the SQLite database to analyze the records, calculate SQL-based KPI outputs, rank companies, and create comparison tables.
+After the data is saved into SQLite, the script automatically runs SQL queries to retrieve, filter, rank, compare, and create database-based analysis outputs.
+
+The `sql_calculated_kpis` query reproduces KPI calculations directly from the raw financial columns in SQLite. This helps check the pandas-calculated KPI results and shows how the same metrics can be calculated directly with SQL.
 
 SQL query outputs include:
 
