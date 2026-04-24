@@ -218,13 +218,13 @@ The pipeline calculates the following financial KPIs:
 
 ### 4.2 SQL Analysis
 
-The pipeline stores the cleaned financial data in a SQLite database:
+After the financial data is extracted and cleaned with Python/pandas, the pipeline saves the structured dataset into a SQLite database:
 
 ```text
 output/financial_analysis.db
 ```
 
-Python/pandas handles the main extraction, cleaning, and KPI calculations. The cleaned dataset is saved into SQLite with KPI columns such as:
+The SQLite table includes the cleaned financial records and the main KPI columns calculated with pandas, such as:
 
 ```text
 total_revenue
@@ -234,11 +234,9 @@ current_ratio
 asset_to_liability_ratio
 ```
 
-After the data is saved into SQLite, the script automatically runs SQL queries to retrieve, filter, rank, compare, and create database-based analysis outputs.
+Once the data is stored in SQLite, the script automatically runs SQL queries to retrieve, filter, rank, compare, and create database-based analysis outputs.
 
-The `sql_calculated_kpis` query reproduces KPI calculations directly from the raw financial columns in SQLite. This helps check the pandas-calculated KPI results and shows how the same metrics can be calculated directly with SQL.
-
-SQL query outputs include:
+SQL query outputs are exported as CSV files, including:
 
 ```text
 all_records.csv
@@ -251,9 +249,10 @@ revenue_by_period.csv
 average_profit_margin_by_company.csv
 ```
 
-The SQL queries can also be inspected or run manually in a SQLite editor, such as DB Browser for SQLite.
+The `sql_calculated_kpis` query also calculates KPI values directly from the raw financial columns in SQLite. This helps check the pandas-calculated KPI results and shows how the same metrics can be calculated directly with SQL.
 
----
+The SQL queries can also be inspected or run manually in a SQLite editor, such as DB Browser for SQLite.
+```
 
 ### 4.3 Power BI Reporting
 
