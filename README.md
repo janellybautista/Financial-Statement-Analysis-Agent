@@ -4,9 +4,9 @@ A Python pipeline that extracts financial metrics from **PDF, Excel, and CSV fin
 
 ---
 
-## What This Project Does
+## 1. Project Overview
 
-This project takes financial files from an input folder and turns them into a clean dataset for analysis.
+This project takes messy financial files from an input folder and turns them into a clean dataset for analysis.
 
 ```text
 PDF / Excel / CSV files
@@ -34,7 +34,7 @@ The pipeline:
 
 ---
 
-## Supported Input Files
+## 2. Supported Input Files
 
 Place all files inside the `input_files/` folder.
 
@@ -48,7 +48,7 @@ Note: For best results, each PDF or Excel file should represent one company/enti
 
 ---
 
-## File Naming Format
+## 3. File Naming Format
 
 Use this format when possible:
 
@@ -84,7 +84,7 @@ is read as:
 
 ---
 
-## CSV Input Format
+## 4. CSV Input Format
 
 CSV files should already be organized in columns.
 
@@ -107,7 +107,7 @@ The pipeline uses file names to identify company, year, month, period, and sourc
 
 ---
 
-## PDF and Excel Input Format
+## 5. PDF and Excel Input Format
 
 PDF and Excel files should include recognizable financial labels, such as:
 
@@ -128,7 +128,9 @@ Note: The parser currently uses regex patterns for common financial labels. If a
 
 ---
 
-## KPIs Calculated
+## 6. KPIs Calculated
+
+The pipeline calculates the following financial KPIs:
 
 | KPI | Formula |
 |---|---|
@@ -139,7 +141,8 @@ Note: The parser currently uses regex patterns for common financial labels. If a
 | Asset-to-liability ratio | `total_assets / liabilities` |
 
 ---
-## SQL Analysis
+
+## 7. SQL Analysis
 
 The pipeline stores the cleaned financial data in a SQLite database:
 
@@ -176,7 +179,31 @@ The SQL queries can also be inspected or run manually in a SQLite editor, such a
 
 ---
 
-## Setup Instructions
+## 8. Power BI Reporting
+
+The main Power BI-ready file is:
+
+```text
+output/financial_data_with_kpis.csv
+```
+
+This file can be imported into Power BI to create dashboard visuals.
+
+Suggested dashboard elements:
+
+| Dashboard Element | Fields |
+|---|---|
+| KPI cards | `total_revenue`, `net_income`, `profit_margin`, `current_ratio` |
+| Revenue chart | `company`, `total_revenue` |
+| Profitability chart | `company`, `profit_margin` |
+| Time trend | `period`, `total_revenue` |
+| Slicers | `company`, `year`, `month`, `source_type` |
+
+Power BI is used as the reporting layer. SQL is used for database-based analysis, while Power BI is used to visualize the final cleaned dataset and KPI outputs.
+
+---
+
+## 9. Setup Instructions
 
 Install the required packages:
 
@@ -186,7 +213,7 @@ pip install pandas matplotlib pdfplumber openpyxl
 
 ---
 
-## How to Run
+## 10. How to Run
 
 1. Add your files to the `input_files/` folder.
 
@@ -213,7 +240,7 @@ python financial_pipeline.py
 
 ---
 
-## Output
+## 11. Output Files
 
 The pipeline creates an `output/` folder.
 
@@ -244,26 +271,42 @@ output/financial_data_with_kpis.csv
 
 ---
 
-## Power BI Dashboard
+## 12. Privacy Note
 
-Use `financial_data_with_kpis.csv` in Power BI to create:
+Do not upload private financial statements to a public GitHub repository.
 
-- KPI cards
-- revenue charts
-- profit margin charts
-- company comparisons
-- period trends
-- financial summary tables
+For portfolio use, use:
 
-Suggested dashboard fields:
+- public financial reports
+- anonymized files
+- synthetic sample data
 
-| Dashboard Element | Fields |
-|---|---|
-| KPI cards | `total_revenue`, `net_income`, `profit_margin`, `current_ratio` |
-| Revenue chart | `company`, `total_revenue` |
-| Profitability chart | `company`, `profit_margin` |
-| Time trend | `period`, `total_revenue` |
-| Slicers | `company`, `year`, `month`, `source_type` |
+This repository should not include private school, company, vendor, employee, donor, or student financial information.
 
 ---
+
+## 13. Future Improvements
+
+Possible future upgrades:
+
+- Add more flexible financial label matching
+- Add support for scanned PDFs or OCR
+- Add data validation checks
+- Add optional AI-generated summaries from already-computed KPI results
+- Add a Streamlit app for uploading files
+- Build a full Power BI dashboard
+
+---
+
+## 14. Project Purpose
+
+I built this project to connect my quantitative research background with business data analysis.
+
+It practices common data analyst tasks:
+
+- cleaning messy data
+- storing records in a database
+- calculating KPIs
+- writing SQL queries
+- preparing outputs for dashboard reporting
 
