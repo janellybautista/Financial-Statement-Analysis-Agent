@@ -251,7 +251,6 @@ average_profit_margin_by_company.csv
 
 The `sql_calculated_kpis` query also calculates KPI values directly from the raw financial columns in SQLite. This helps check the pandas-calculated KPI results and shows how the same metrics can be calculated directly with SQL.
 
-The SQL queries can also be inspected or run manually in a SQLite editor, such as DB Browser for SQLite.
 ```
 
 ### 4.3 Power BI Reporting
