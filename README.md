@@ -140,6 +140,12 @@ Install the required packages:
 pip install pandas matplotlib pdfplumber openpyxl
 ```
 
+If `pip` does not work, try:
+
+```bash
+python3 -m pip install pandas matplotlib pdfplumber openpyxl
+```
+
 ---
 
 ### 3.2 How to Run
