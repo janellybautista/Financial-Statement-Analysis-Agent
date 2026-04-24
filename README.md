@@ -139,12 +139,42 @@ Note: The parser currently uses regex patterns for common financial labels. If a
 | Asset-to-liability ratio | `total_assets / liabilities` |
 
 ---
-## SQL Outputs
+## SQL Analysis
 
 The pipeline stores the cleaned financial data in a SQLite database:
 
 ```text
 output/financial_analysis.db
+```
+
+Python/pandas handles the main extraction, cleaning, and KPI calculations. The cleaned dataset is saved into SQLite with KPI columns such as:
+
+```text
+total_revenue
+profit_margin
+operating_expense_ratio
+current_ratio
+asset_to_liability_ratio
+```
+
+The script then automatically runs SQL queries on the SQLite database to analyze the records, calculate SQL-based KPI outputs, rank companies, and create comparison tables.
+
+SQL query outputs include:
+
+```text
+all_records.csv
+sql_calculated_kpis.csv
+highest_profit_margin.csv
+strongest_liquidity.csv
+largest_total_assets.csv
+revenue_by_company.csv
+revenue_by_period.csv
+average_profit_margin_by_company.csv
+```
+
+The SQL queries can also be inspected or run manually in a SQLite editor, such as DB Browser for SQLite.
+
+---
 
 ## Setup Instructions
 
