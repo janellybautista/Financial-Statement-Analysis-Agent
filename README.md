@@ -139,31 +139,12 @@ Note: The parser currently uses regex patterns for common financial labels. If a
 | Asset-to-liability ratio | `total_assets / liabilities` |
 
 ---
-
 ## SQL Outputs
 
 The pipeline stores the cleaned financial data in a SQLite database:
 
 ```text
 output/financial_analysis.db
-```
-
-The script automatically runs SQL queries and exports results such as:
-
-```text
-all_records.csv
-sql_calculated_kpis.csv
-highest_profit_margin.csv
-strongest_liquidity.csv
-largest_total_assets.csv
-revenue_by_company.csv
-revenue_by_period.csv
-average_profit_margin_by_company.csv
-```
-
-The SQL queries retrieve, filter, rank, compare, and calculate KPI results from the SQLite database.
-
----
 
 ## Setup Instructions
 
