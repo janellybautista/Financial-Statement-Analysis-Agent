@@ -64,7 +64,7 @@ company_b_2024_02.xlsx
 company_c_april_2024.pdf
 ```
 
-The pipeline uses the file name to identify metadata.
+The pipeline uses file names to identify company, year, month, period, source file, and source type.
 
 Example:
 
@@ -103,7 +103,7 @@ company_b,2024,01,400000,300000,80000,500000,750000,250000,180000,100000
 company_c,2024,01,600000,200000,150000,420000,1000000,350000,220000,180000
 ```
 
-If `company`, `year`, or `month` are missing from the CSV, the pipeline will try to extract them from the file name.
+The pipeline uses file names to identify company, year, month, period, and source type for PDF, Excel, and CSV files. If a CSV already includes these columns, the file values are used; otherwise, missing metadata is filled from the file name.
 
 ---
 
@@ -137,6 +137,31 @@ Note: The parser currently uses regex patterns for common financial labels. If a
 | Operating expense ratio | `operating_expenses / total_revenue` |
 | Current ratio | `current_assets / liabilities` |
 | Asset-to-liability ratio | `total_assets / liabilities` |
+
+---
+
+## SQL Outputs
+
+The pipeline stores the cleaned financial data in a SQLite database:
+
+```text
+output/financial_analysis.db
+```
+
+The script automatically runs SQL queries and exports results such as:
+
+```text
+all_records.csv
+sql_calculated_kpis.csv
+highest_profit_margin.csv
+strongest_liquidity.csv
+largest_total_assets.csv
+revenue_by_company.csv
+revenue_by_period.csv
+average_profit_margin_by_company.csv
+```
+
+The SQL queries retrieve, filter, rank, compare, and calculate KPI results from the SQLite database.
 
 ---
 
@@ -231,3 +256,39 @@ Suggested dashboard fields:
 
 ---
 
+## Privacy Note
+
+Do not upload private financial statements to a public GitHub repository.
+
+For portfolio use, use:
+
+- public financial reports
+- anonymized files
+- synthetic sample data
+
+This repository should not include private school, company, vendor, employee, donor, or student financial information.
+
+---
+
+## Future Improvements
+
+- Add more flexible financial label matching
+- Add support for scanned PDFs or OCR
+- Add data validation checks
+- Add optional AI-generated summaries from already-computed KPI results
+- Add a Streamlit app for uploading files
+- Build a full Power BI dashboard
+
+---
+
+## Project Purpose
+
+I built this project to connect my quantitative research background with business data analysis.
+
+It practices common data analyst tasks:
+
+- cleaning messy data
+- storing records in a database
+- calculating KPIs
+- writing SQL queries
+- preparing outputs for dashboard reporting
