@@ -251,17 +251,17 @@ average_profit_margin_by_company.csv
 
 The `sql_calculated_kpis` query also calculates KPI values directly from the raw financial columns in SQLite. This helps check the pandas-calculated KPI results and shows how the same metrics can be calculated directly with SQL.
 
-```
+---
 
 ### 4.3 Power BI Reporting
 
-The main Power BI-ready file is:
+The main file to import into Power BI is:
 
 ```text
 output/financial_data_with_kpis.csv
 ```
 
-This file can be imported into Power BI to create dashboard visuals.
+This file can be used to create dashboard visuals.
 
 Suggested dashboard elements:
 
@@ -272,8 +272,6 @@ Suggested dashboard elements:
 | Profitability chart | `company`, `profit_margin` |
 | Time trend | `period`, `total_revenue` |
 | Slicers | `company`, `year`, `month`, `source_type` |
-
-Power BI is used as the reporting layer. SQL is used for database-based analysis, while Power BI is used to visualize the final cleaned dataset and KPI outputs.
 
 ---
 
