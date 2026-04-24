@@ -283,7 +283,7 @@ Possible future upgrades:
 
 - Add more flexible financial label matching (Will use LlamaParse...?)
 - Add support for scanned PDFs or OCR
-- Add AI-generated summaries from already-computed KPI results
+- Add AI-generated summaries from already-computed KPI results (Turn this into and Agent...)
 - Add a Streamlit app for uploading files
 
 ---
