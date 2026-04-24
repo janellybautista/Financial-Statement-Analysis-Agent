@@ -4,7 +4,7 @@ A Python pipeline that extracts financial metrics from **PDF, Excel, and CSV fin
 
 ---
 
-## 1. Project Overview
+### 1. Project Overview
 
 This project takes messy financial files from an input folder and turns them into a clean dataset for analysis.
 
@@ -34,7 +34,7 @@ The pipeline:
 
 ---
 ## 2. Input Files and Formatting
-##  2.1 Supported Input Files
+####  2.1 Supported Input Files
 
 Place all files inside the `input_files/` folder.
 
@@ -48,7 +48,7 @@ Note: For best results, each PDF or Excel file should represent one company/enti
 
 ---
 
-### 2.2 File Naming Format
+#### 2.2 File Naming Format
 
 Use this format when possible:
 
@@ -84,7 +84,7 @@ is read as:
 
 ---
 
-### 2.3 CSV Input Format
+#### 2.3 CSV Input Format
 
 CSV files should already be organized in columns.
 
@@ -107,7 +107,7 @@ The pipeline uses file names to identify company, year, month, period, and sourc
 
 ---
 
-### 2.4 PDF and Excel Input Format
+#### 2.4 PDF and Excel Input Format
 
 PDF and Excel files should include recognizable financial labels, such as:
 
@@ -127,8 +127,8 @@ The parser searches for these labels and extracts the matching values.
 Note: The parser currently uses regex patterns for common financial labels. If a PDF or Excel file uses different wording, abbreviations, or unusual formatting, the patterns in `financial_pipeline.py` may need to be updated.
 
 ---
-# 3. How to Run and Expected Output
-## 3.1 Setup Instructions
+## 3. How to Run and Expected Output
+#### 3.1 Setup Instructions
 
 Install the required packages:
 
@@ -138,7 +138,7 @@ pip install pandas matplotlib pdfplumber openpyxl
 
 ---
 
-## 3.2 How to Run
+#### 3.2 How to Run
 
 1. Add your files to the `input_files/` folder.
 
@@ -165,7 +165,7 @@ python financial_pipeline.py
 
 ---
 
-##  3.3 Output Files
+####  3.3 Output Files
 
 The pipeline creates an `output/` folder.
 
@@ -199,7 +199,7 @@ output/financial_data_with_kpis.csv
 
 
 ## 4. Analytics & Reportinh
-## 4.1 KPIs Calculated
+#### 4.1 KPIs Calculated
 
 The pipeline calculates the following financial KPIs:
 
@@ -213,7 +213,7 @@ The pipeline calculates the following financial KPIs:
 
 ---
 
-## 4.2 SQL Analysis
+#### 4.2 SQL Analysis
 
 The pipeline stores the cleaned financial data in a SQLite database:
 
@@ -250,7 +250,7 @@ The SQL queries can also be inspected or run manually in a SQLite editor, such a
 
 ---
 
-## 4.4. Power BI Reporting
+#### 4.4. Power BI Reporting
 
 The main Power BI-ready file is:
 
@@ -273,7 +273,7 @@ Suggested dashboard elements:
 Power BI is used as the reporting layer. SQL is used for database-based analysis, while Power BI is used to visualize the final cleaned dataset and KPI outputs.
 
 ---
-#### 5. Future Improvements
+## 5. Future Improvements
 
 Possible future upgrades:
 
