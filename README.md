@@ -4,7 +4,7 @@ A Python pipeline that extracts financial metrics from **PDF, Excel, and CSV fin
 
 ---
 
-### 1. Project Overview
+## 1. Project Overview
 
 This project takes messy financial files from an input folder and turns them into a clean dataset for analysis.
 
