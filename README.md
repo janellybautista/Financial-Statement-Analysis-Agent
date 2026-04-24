@@ -198,7 +198,7 @@ output/financial_data_with_kpis.csv
 
 
 
-## 4. Analytics & Reportinh
+## 4. Analytics & Reporting
 #### 4.1. KPIs Calculated
 
 The pipeline calculates the following financial KPIs:
