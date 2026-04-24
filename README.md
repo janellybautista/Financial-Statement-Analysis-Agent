@@ -41,8 +41,12 @@ Place all files inside the `input_files/` folder.
 | File Type | Extension | How the Pipeline Reads It |
 |---|---|---|
 | PDF | `.pdf` | Extracts text and searches for financial labels |
-| Excel | `.xlsx`, `.xls` | Reads sheets, converts them to text, and searches for financial labels |
+| Excel | `.xlsx`, `.xls` | Reads all sheets in the workbook and searches for financial labels |
 | CSV | `.csv` | Reads structured columns directly |
+
+Excel files can contain one or more sheets. The pipeline reads all sheets in the workbook, so users do not need to split each sheet into a separate Excel file.
+
+Note: For cleaner analysis, each PDF or Excel file should represent one company/entity and one reporting period when possible. If one workbook contains multiple companies or periods across different sheets, the parser may need additional logic to separate them correctly.
 
 ---
 
@@ -101,6 +105,8 @@ company_b,2024,01,400000,300000,80000,500000,750000,250000,180000,100000
 company_c,2024,01,600000,200000,150000,420000,1000000,350000,220000,180000
 ```
 
+If `company`, `year`, or `month` are missing from the CSV, the pipeline will try to extract them from the file name.
+
 ---
 
 ## PDF and Excel Input Format
@@ -118,10 +124,11 @@ Total current liabilities
 Retained earnings
 ```
 
-The parser searches for these labels and extracts the matching values. Note: The parser currently uses regex patterns for common financial labels. If a PDF or Excel file uses different wording, abbreviations, or unusual formatting, the patterns in `financial_pipeline.py` may need to be updated.
+The parser searches for these labels and extracts the matching values.
+
+Note: The parser currently uses regex patterns for common financial labels. If a PDF or Excel file uses different wording, abbreviations, or unusual formatting, the patterns in `financial_pipeline.py` may need to be updated.
 
 ---
-
 
 ## KPIs Calculated
 
